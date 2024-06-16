@@ -36,7 +36,9 @@ export default class LookalikePlugin extends Plugin {
 		);
 		this.registerEvent(
 			this.app.workspace.on("active-leaf-change", (leaf) => {
+				// @ts-expect-error
 				if (leaf?.view.file && "path" in leaf?.view.file) {
+					// @ts-expect-error
 					this.onFileChange(leaf?.view.file as TFile);
 				}
 			})

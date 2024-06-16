@@ -132,6 +132,7 @@ export class TfIdf {
 		let doc_vector = this.createVectorSpaceModel(query, document);
 		let similarityIndex = 0;
 		for (let i = 0; i < query.length; i++) {
+			// @ts-expect-error
 			let toAdd = query_vector[i] * doc_vector[i];
 			if (isNaN(toAdd)) {
 				similarityIndex += 0;
@@ -139,7 +140,9 @@ export class TfIdf {
 				similarityIndex += toAdd;
 			}
 		}
+		// @ts-expect-error
 		let query_mag = this.calculateMagnitude(query_vector);
+		// @ts-expect-error
 		let doc_mag = this.calculateMagnitude(doc_vector);
 		let similarity = (1.0 * similarityIndex) / (query_mag * doc_mag);
 		return isNaN(similarity) ? 0 : similarity;
