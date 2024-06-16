@@ -12,8 +12,8 @@ Coming soon! This plugin isn't yet available in the Obsidian community plugins l
 
 1. Find the latest release from the [releases page](https://github.com/jlweston/obsidian-note-proximity-plugin/releases).
 2. Download `main.js`, `styles.css`, and `manifest.json`.
-3. Create a folder in your Obsidian vault's plugins directory called `obsidian-note-proximity-plugin`.
-4. Copy the downloaded files into the `obsidian-note-proximity-plugin` folder.
+3. Create a folder in your Obsidian vault's plugins directory called `note-promixity`.
+4. Copy the downloaded files into the `note-promixity` folder.
 5. Reload Obsidian.
 6. Under Settings -> Community plugins, enable the plugin.
 
