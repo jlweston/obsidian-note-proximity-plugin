@@ -1,7 +1,7 @@
 {
 	"id": "note-promixity-plugin",
 	"name": "Lookalike",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"minAppVersion": "1.62.0",
 	"description": "Finds similar notes based on the frequency of terms within the vault.",
 	"author": "Jamie Weston",
