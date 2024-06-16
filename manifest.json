@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "note-promixity-plugin",
+	"name": "Lookalike",
 	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+	"minAppVersion": "1.62.0",
+	"description": "Finds similar notes based on the frequency of terms within the vault.",
+	"author": "Jamie Weston",
+	"authorUrl": "https://github.com/jlweston",
+	"fundingUrl": "https://buymeacoffee.com/jamieweston",
+	"isDesktopOnly": true
 }
