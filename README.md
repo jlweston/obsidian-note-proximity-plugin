@@ -1,5 +1,7 @@
 # Obsidian Lookalike Plugin
 
+[![GitHub Release](https://img.shields.io/github/v/release/jlweston/obsidian-note-proximity-plugin?sort=semver)](https://github.com/jlweston/obsidian-note-proximity-plugin/releases) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/MIT) [!["Buy Me A Coffee"](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/jamieweston)
+
 This is a plugin for Obsidian that allows you to identify other notes which may be similar to the current note. It does this by analysing word frequencies across all notes in the vault and comparing them to the current note.
 
 ## Installation
