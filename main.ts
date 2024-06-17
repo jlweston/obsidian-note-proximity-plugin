@@ -40,6 +40,7 @@ export default class LookalikePlugin extends Plugin {
 				if (leaf?.view.file && "path" in leaf?.view.file) {
 					// @ts-expect-error
 					if (leaf?.view.file instanceof TFile) {
+						// @ts-expect-error
 						this.onFileChange(leaf?.view.file);
 					}
 				}
