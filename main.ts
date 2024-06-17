@@ -39,13 +39,18 @@ export default class LookalikePlugin extends Plugin {
 				// @ts-expect-error
 				if (leaf?.view.file && "path" in leaf?.view.file) {
 					// @ts-expect-error
-					this.onFileChange(leaf?.view.file as TFile);
+					if (leaf?.view.file instanceof TFile) {
+						this.onFileChange(leaf?.view.file);
+					}
 				}
 			})
 		);
 
 		// populate initial view with active file
-		this.onFileChange(this.app.workspace.getActiveFile() as TFile);
+		const activeFile = this.app.workspace.getActiveFile();
+		if (activeFile && activeFile instanceof TFile) {
+			this.onFileChange(activeFile);
+		}
 
 		// TODO add settings tab back once we have settings...
 		// this.addSettingTab(new SampleSettingTab(this.app, this));
@@ -125,7 +130,7 @@ export default class LookalikePlugin extends Plugin {
 	}
 }
 
-class SampleSettingTab extends PluginSettingTab {
+class LookalikeSettingsTab extends PluginSettingTab {
 	plugin: LookalikePlugin;
 
 	constructor(app: App, plugin: LookalikePlugin) {
