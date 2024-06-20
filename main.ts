@@ -1,31 +1,14 @@
-import {
-	App,
-	ItemView,
-	Plugin,
-	PluginSettingTab,
-	Setting,
-	TFile,
-	WorkspaceLeaf,
-} from "obsidian";
+import { ItemView, Plugin, TFile, WorkspaceLeaf } from "obsidian";
 import { TfIdf } from "TfIdf";
-
-interface NoteProximitySettings {
-	mySetting: string;
-}
-
-const DEFAULT_SETTINGS: NoteProximitySettings = {
-	mySetting: "default",
-};
 
 export const NOTE_PROXIMITY_VIEW = "note-proximity-view";
 
 export default class LookalikePlugin extends Plugin {
-	settings: NoteProximitySettings;
-
 	async onload() {
-		await this.loadSettings();
-
-		this.registerView(NOTE_PROXIMITY_VIEW, (leaf) => new ExampleView(leaf));
+		this.registerView(
+			NOTE_PROXIMITY_VIEW,
+			(leaf) => new LookalikeView(leaf)
+		);
 
 		// Register listeners for new/changed files.
 		this.registerEvent(
@@ -52,9 +35,6 @@ export default class LookalikePlugin extends Plugin {
 		if (activeFile && activeFile instanceof TFile) {
 			this.onFileChange(activeFile);
 		}
-
-		// TODO add settings tab back once we have settings...
-		// this.addSettingTab(new SampleSettingTab(this.app, this));
 	}
 
 	// TODO: should probably optimise to add/remove only the new/changed file
@@ -64,14 +44,6 @@ export default class LookalikePlugin extends Plugin {
 	}
 
 	onunload() {}
-
-	async loadSettings() {
-		this.settings = Object.assign(
-			{},
-			DEFAULT_SETTINGS,
-			await this.loadData()
-		);
-	}
 
 	async activateView() {
 		const { workspace } = this.app;
@@ -100,7 +72,7 @@ export default class LookalikePlugin extends Plugin {
 		const { workspace } = this.app;
 		const leaves = workspace.getLeavesOfType(NOTE_PROXIMITY_VIEW);
 		if (leaves.length > 0) {
-			const view = leaves[0].view as ExampleView;
+			const view = leaves[0].view as LookalikeView;
 			view.update(rankings);
 		}
 	}
@@ -121,53 +93,12 @@ export default class LookalikePlugin extends Plugin {
 			10,
 			currentFile.path
 		);
-		console.log({ rankings });
 
 		return rankings;
 	}
-
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
 }
 
-class LookalikeSettingsTab extends PluginSettingTab {
-	plugin: LookalikePlugin;
-
-	constructor(app: App, plugin: LookalikePlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		const { containerEl } = this;
-
-		containerEl.empty();
-
-		// TODO add settings for:
-		// - excluded folders
-		// - number of similar notes to show
-		// - similarity threshold
-		// - choice of strategies (for both tf and idf)
-		// - ability to exclude certain words
-		// - ability to exclude frontmatter/codeblocks
-
-		new Setting(containerEl)
-			.setName("Setting #1")
-			.setDesc("It's a secret")
-			.addText((text) =>
-				text
-					.setPlaceholder("Enter your secret")
-					.setValue(this.plugin.settings.mySetting)
-					.onChange(async (value) => {
-						this.plugin.settings.mySetting = value;
-						await this.plugin.saveSettings();
-					})
-			);
-	}
-}
-
-export class ExampleView extends ItemView {
+export class LookalikeView extends ItemView {
 	constructor(leaf: WorkspaceLeaf) {
 		super(leaf);
 	}
