@@ -35,6 +35,22 @@ export default class LookalikePlugin extends Plugin {
 		if (activeFile && activeFile instanceof TFile) {
 			this.onFileChange(activeFile);
 		}
+
+		// Allow users to reopen the view if they close it
+		this.addCommand({
+			id: "open-sidebar",
+			name: "Open Lookalike sidebar",
+			callback: () => {
+				const previousLeaf = this.app.workspace.getMostRecentLeaf();
+				this.activateView();
+				if (previousLeaf) {
+					// @ts-expect-error
+					this.onFileChange(previousLeaf?.view.file);
+				}
+			},
+		});
+
+		await this.activateView();
 	}
 
 	// TODO: should probably optimise to add/remove only the new/changed file
